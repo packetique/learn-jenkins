@@ -6,60 +6,16 @@ pipeline {
             steps {
                 slackSend channel: '#team', message: '***Start build.***', username: 'jenkins'
                 sh 'ip a | grep -i inet'
-
-                }
+                  }
+              }
             }
-        }
-    }
+
     post {
         success {
             slackSend channel: '#team', message: '***Build success***!', username: 'jenkins'
-        }
+                }
         failure {
             slackSend channel: '#team', message: '***Build failure!***', username: 'jenkins'
-        }
-    }
-  }
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-        echo 'Building image...'
-        sh 'podman build jenkinsfiles/docker/toolbox/Dockerfile'
-      }
-    }
-  post {
-    succsess {
-      slackSend channel: '#team', message: 'Build success!', username: 'jenkins'
-        }
-    failure {
-      slackSend channel: '#team', message: 'Bild failure!', username: 'jenkins'
-        }
-        }
-      }
-    }
+                }
+          }
+}
