@@ -1,12 +1,13 @@
 #!groovy
 pipeline {
     agent any
-    environment name: 'SLACK_TOKEN', value: credentials('slack tocken')
     stages {
         stage('Start build') {
             steps {
                 slackSend channel: '#team', message: 'Start build.', username: 'jenkins'
-                sh 'podman build jenkinsfiles/docker/toolbox/Dockerfile'
+                sh 'ip a | grep -i inet'
+
+                }
             }
         }
     }
