@@ -4,7 +4,7 @@ pipeline {
     stages {
         stage('Start build') {
             steps {
-                slackSend channel: '#team', message: 'Start build.', username: 'jenkins'
+                slackSend channel: '#team', message: '***Start build.***', username: 'jenkins'
                 sh 'ip a | grep -i inet'
 
                 }
@@ -13,10 +13,10 @@ pipeline {
     }
     post {
         success {
-            slackSend channel: '#team', message: 'Build success!', username: 'jenkins', token: "$cred.asSynchronized()"
+            slackSend channel: '#team', message: '***Build success***!', username: 'jenkins'
         }
         failure {
-            slackSend channel: '#team', message: 'Build failure!', username: 'jenkins'
+            slackSend channel: '#team', message: '***Build failure!***', username: 'jenkins'
         }
     }
 }
