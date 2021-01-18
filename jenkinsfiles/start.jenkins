@@ -19,7 +19,7 @@ pipeline {
             slackSend channel: '#team', message: '***Build failure!***', username: 'jenkins'
         }
     }
-}
+  }
 
 
 
