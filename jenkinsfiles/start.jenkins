@@ -1,23 +1,21 @@
 #!groovy
 pipeline {
   agent any
-  timestamp()
   stages {
     stage('Build') {
       steps {
         slackSend channel: '#team', message: 'Start build.', username: 'jenkins'
         echo 'Building image...'
-        sh 'podman build .'
+        sh 'podman build jenkinsfiles/docker/toolbox/Dockerfile'
       }
     }
-  post {
-    succsess {
-      slackSend channel: '#team', message: 'Build success!', username: 'jenkins'
+    post {
+      succsess {
+        slackSend channel: '#team', message: 'Build success!', username: 'jenkins'
+          }
+      failure {
+        slackSend channel: '#team', message: 'Bild failure!', username: 'jenkins'
+          }
+        }
+      }
     }
-    failure {
-      slackSend channel: '#team', message: 'Bild failure!', username: 'jenkins'
-    }
-  }
-  }
-
-  }
