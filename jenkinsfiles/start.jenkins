@@ -1,6 +1,7 @@
 #!groovy
 pipeline {
     agent any
+    environment name: 'SLACK_TOKEN', value: credentials('slack tocken')
     stages {
         stage('Start build') {
             steps {
@@ -10,8 +11,8 @@ pipeline {
         }
     }
     post {
-        always {
-            slackSend channel: '#team', message: 'Build success!', username: 'jenkins'
+        success {
+            slackSend channel: '#team', message: 'Build success!', username: 'jenkins', token: "$cred.asSynchronized()"
         }
         failure {
             slackSend channel: '#team', message: 'Build failure!', username: 'jenkins'
